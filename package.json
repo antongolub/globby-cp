@@ -37,7 +37,7 @@
     "tempy": "^3.0.0"
   },
   "dependencies": {
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.0.0",
     "globby": "^13.1.2",
     "minimist": "^1.2.6"
   }
