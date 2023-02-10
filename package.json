@@ -6,6 +6,7 @@
   "exports": {
     ".": "./src/main/js/index.js"
   },
+  "types": "./src/main/js/index.d.ts",
   "bin": {
     "globby-cp": "./src/main/js/cli.js",
     "gcp": "./src/main/js/cli.js"
