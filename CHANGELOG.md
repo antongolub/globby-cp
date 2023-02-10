@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/antongolub/globby-cp/compare/v1.1.2...v1.1.3) (2023-02-10)
+
+### Fixes & improvements
+* fix(deps): update dependency fs-extra to v11 ([a5ff29a](https://github.com/antongolub/globby-cp/commit/a5ff29af1f8456b801ff9a49c9fa91c9a0f66b65))
+* fix: types ([7cb125e](https://github.com/antongolub/globby-cp/commit/7cb125e2193c8d557f091d2803deb13f4b42844f))
+
 ## [1.1.2](https://github.com/antongolub/globby-cp/compare/v1.1.1...v1.1.2) (2022-07-29)
 
 ### Fixes & improvements

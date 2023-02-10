@@ -3,23 +3,23 @@
     "branch": "master",
     "build_identifier": "",
     "build_url": "",
-    "commit_sha": "6f839c0d1695c93cd4e23fab2dfef413eed5055a",
-    "committed_at": 1659076301,
+    "commit_sha": "da1f21f2c6aa1676f364fa7677a34c1ce2dfe6ad",
+    "committed_at": 1676059700,
     "name": "true"
   },
   "environment": {
-    "gem_version": "3.1.2",
+    "gem_version": "3.3.5",
     "package_version": "",
     "pwd": "/home/runner/work/globby-cp/globby-cp",
     "prefix": "/home/runner/work/globby-cp/globby-cp",
     "rails_root": "",
-    "reporter_version": "0.10.3",
+    "reporter_version": "0.10.4",
     "simplecov_root": ""
   },
   "git": {
     "branch": "master",
-    "head": "6f839c0d1695c93cd4e23fab2dfef413eed5055a",
-    "committed_at": 1659076301
+    "head": "da1f21f2c6aa1676f364fa7677a34c1ce2dfe6ad",
+    "committed_at": 1676059700
   },
   "covered_percent": 100,
   "covered_strength": 0,
