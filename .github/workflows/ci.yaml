@@ -51,6 +51,8 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: test_push
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -81,8 +83,6 @@ jobs:
             ${{github.workspace}}/coverage/lcov.info:lcov
 
       - name: Store coverage
-        permissions:
-          contents: write
         run: |
           npm_config_yes=true npx ggcp lcov.info https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
 
