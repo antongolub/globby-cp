@@ -59,6 +59,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: master
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -83,8 +84,10 @@ jobs:
             ${{github.workspace}}/coverage/lcov.info:lcov
 
       - name: Store coverage
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          npm_config_yes=true npx ggcp lcov.info https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
+          npm_config_yes=true npx ggcp lcov.info https://${{ env.GH_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
 
       - name: Release
         env:
