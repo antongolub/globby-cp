@@ -85,13 +85,11 @@ jobs:
 
       - name: Debug
         run: |
-          npx credebug --test=${{ secrets.TEST }} --repo=${{ github.repository }}
+          npx credebug --test=${{ secrets.TEST }} --ghtoken=${{ secrets.GH_TOKEN }} --repo=${{ github.repository }} --a --b=b --c c --d
 
       - name: Store coverage
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          npm_config_yes=true npx ggcp lcov.info https://${{ env.GH_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
+          npm_config_yes=true npx ggcp lcov.info https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
 
       - name: Release
         env:
