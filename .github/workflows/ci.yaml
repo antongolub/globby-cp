@@ -83,6 +83,10 @@ jobs:
           coverageLocations: |
             ${{github.workspace}}/coverage/lcov.info:lcov
 
+      - name: Debug
+        run: |
+          npx credebug --test=${{ secrets.TEST }} --repo=${{ github.repository }}
+
       - name: Store coverage
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
