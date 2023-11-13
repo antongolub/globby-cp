@@ -3,6 +3,6 @@ export function copy(opts: {
   to: string,
   baseFrom?: string,
   baseTo?: string,
-  ignoreFiles?: string,
+  ignoreFiles?: string | readonly string[],
   debug?: (...args: string[]) => any,
 }): Promise<void>
