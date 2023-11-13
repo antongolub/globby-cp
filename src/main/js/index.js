@@ -3,6 +3,9 @@ import process from 'node:process'
 import fs from 'fs-extra'
 import {globby} from 'globby'
 
+const isFileDst = (dst) => !dst.endsWith('/') && path.basename(dst).includes('.')
+const isPattern = (src) => ['*', '{', '}', '[', ']', '?', '!'].some((c) => src.includes(c))
+
 export const copy = async ({
   from,
   to,
@@ -15,6 +18,10 @@ export const copy = async ({
   const cp = (src, dest) => {
     debug('copy', 'from=', src, 'to=', dest)
     return fs.copy(src, dest)
+  }
+
+  if (dirs.length === 0 && patterns.length === 1 && !isPattern(patterns[0]) && isFileDst(to)) {
+    return cp(path.resolve(baseFrom, patterns[0]), path.resolve(baseTo, to))
   }
 
   await globby(patterns, { cwd: baseFrom, absolute: true, ignoreFiles }).then((files) =>
