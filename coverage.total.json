@@ -3,8 +3,8 @@
     "branch": "master",
     "build_identifier": "",
     "build_url": "",
-    "commit_sha": "da1f21f2c6aa1676f364fa7677a34c1ce2dfe6ad",
-    "committed_at": 1676059700,
+    "commit_sha": "cde901dc7313d16a1154fc960d54112cb420de61",
+    "committed_at": 1699859501,
     "name": "true"
   },
   "environment": {
@@ -13,20 +13,20 @@
     "pwd": "/home/runner/work/globby-cp/globby-cp",
     "prefix": "/home/runner/work/globby-cp/globby-cp",
     "rails_root": "",
-    "reporter_version": "0.10.4",
+    "reporter_version": "0.11.1",
     "simplecov_root": ""
   },
   "git": {
     "branch": "master",
-    "head": "da1f21f2c6aa1676f364fa7677a34c1ce2dfe6ad",
-    "committed_at": 1676059700
+    "head": "cde901dc7313d16a1154fc960d54112cb420de61",
+    "committed_at": 1699859501
   },
   "covered_percent": 100,
   "covered_strength": 0,
   "line_counts": {
     "missed": 0,
-    "covered": 96,
-    "total": 96
+    "covered": 103,
+    "total": 103
   },
   "source_files": [
     {
@@ -42,14 +42,14 @@
       "name": "src/main/js/cli.js"
     },
     {
-      "blob_id": "94661eb16a5579c6043a3419139515b5776e1d7b",
-      "coverage": "[4,4,4,4,4,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,4,4,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,1,2,2,2,2,2]",
+      "blob_id": "1a5ccd6d83fe74e5da1abb30e748025e2203de5f",
+      "coverage": "[4,4,4,4,4,4,4,4,3,3,3,4,4,3,3,3,3,3,3,3,3,3,3,1,1,2,2,2,2,1,1,1,2,2,2,2,2,3,4,4,3,3,3,3,3,3,3,3,3,3,1,1,1,1,3,2,2,3,3,3,3,3]",
       "covered_percent": 100,
-      "covered_strength": 2.1272727272727274,
+      "covered_strength": 2.725806451612903,
       "line_counts": {
         "missed": 0,
-        "covered": 55,
-        "total": 55
+        "covered": 62,
+        "total": 62
       },
       "name": "src/main/js/index.js"
     }

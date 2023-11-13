@@ -1,3 +1,11 @@
+## [1.2.0](https://github.com/antongolub/globby-cp/compare/v1.1.3...v1.2.0) (2023-11-13)
+
+### Fixes & improvements
+* fix(types): let `ignoreFiles` be string[] ([89102fb](https://github.com/antongolub/globby-cp/commit/89102fbc2cab19558717fcec4d0e8294658c0ebf))
+
+### Features
+* feat: support file to file copying ([33f688d](https://github.com/antongolub/globby-cp/commit/33f688dc4c38336a0e00eac3207333b9158954cd))
+
 ## [1.1.3](https://github.com/antongolub/globby-cp/compare/v1.1.2...v1.1.3) (2023-02-10)
 
 ### Fixes & improvements
