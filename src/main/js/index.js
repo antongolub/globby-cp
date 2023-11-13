@@ -5,23 +5,23 @@ import {globby} from 'globby'
 
 const isFileDst = (dst) => !dst.endsWith('/') && path.basename(dst).includes('.')
 const isPattern = (src) => ['*', '{', '}', '[', ']', '?', '!'].some((c) => src.includes(c))
+const cp = (src, dest, debug = () => {}) => {
+  debug('copy', 'from=', src, 'to=', dest)
+  return fs.copy(src, dest)
+}
 
 export const copy = async ({
   from,
   to,
   baseFrom = process.cwd(),
   baseTo = process.cwd(),
-  debug = () => {},
+  debug,
   ignoreFiles
 }) => {
   const {patterns, dirs} = await parseSources(from, baseFrom)
-  const cp = (src, dest) => {
-    debug('copy', 'from=', src, 'to=', dest)
-    return fs.copy(src, dest)
-  }
 
   if (dirs.length === 0 && patterns.length === 1 && !isPattern(patterns[0]) && isFileDst(to)) {
-    return cp(path.resolve(baseFrom, patterns[0]), path.resolve(baseTo, to))
+    return cp(path.resolve(baseFrom, patterns[0]), path.resolve(baseTo, to), debug)
   }
 
   await globby(patterns, { cwd: baseFrom, absolute: true, ignoreFiles }).then((files) =>
@@ -60,4 +60,3 @@ export const parseSources = async (src, base) => {
 
   return {patterns, dirs}
 }
-
