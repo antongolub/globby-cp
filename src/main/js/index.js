@@ -5,7 +5,7 @@ import {globby} from 'globby'
 
 const isFileDst = (dst) => !dst.endsWith('/') && path.basename(dst).includes('.')
 const isPattern = (src) => ['*', '{', '}', '[', ']', '?', '!'].some((c) => src.includes(c))
-const cp = (src, dest, debug = () => {}) => {
+const cp = (src, dest, debug = process.env.DEBUG ? console.debug : () => {}) => {
   debug('copy', 'from=', src, 'to=', dest)
   return fs.copy(src, dest)
 }
