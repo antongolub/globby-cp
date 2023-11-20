@@ -1,3 +1,8 @@
+## [1.3.0](https://github.com/antongolub/globby-cp/compare/v1.2.0...v1.3.0) (2023-11-20)
+
+### Features
+* feat: enable console.debug if env.DEBUG set ([72f65cd](https://github.com/antongolub/globby-cp/commit/72f65cd54ce3ba15a51d52b62140363d4c69ec41))
+
 ## [1.2.0](https://github.com/antongolub/globby-cp/compare/v1.1.3...v1.2.0) (2023-11-13)
 
 ### Fixes & improvements
