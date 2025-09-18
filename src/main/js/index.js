@@ -1,13 +1,14 @@
 import path from 'node:path'
 import process from 'node:process'
-import fs from 'fs-extra'
-import {globby} from 'globby'
+import { cp as fsCopy, lstat as fsStat } from 'node:fs/promises'
+import { globby } from 'globby'
 
+const SPECIALS = '*{}[]?!'.split()
 const isFileDst = (dst) => !dst.endsWith('/') && path.basename(dst).includes('.')
-const isPattern = (src) => ['*', '{', '}', '[', ']', '?', '!'].some((c) => src.includes(c))
-const cp = (src, dest, debug = process.env.DEBUG ? console.debug : () => {}) => {
+const isPattern = (src) => SPECIALS.some((c) => src.includes(c))
+const cp = (src, dest, debug) => {
   debug('copy', 'from=', src, 'to=', dest)
-  return fs.copy(src, dest)
+  return fsCopy(src, dest, { recursive: true })
 }
 
 export const copy = async ({
@@ -15,24 +16,33 @@ export const copy = async ({
   to,
   baseFrom = process.cwd(),
   baseTo = process.cwd(),
-  debug,
-  ignoreFiles
+  debug = process.env.DEBUG ? console.debug : () => {},
+  ignoreFiles,
+  ...opts
 }) => {
   const {patterns, dirs} = await parseSources(from, baseFrom)
 
-  if (dirs.length === 0 && patterns.length === 1 && !isPattern(patterns[0]) && isFileDst(to)) {
-    return cp(path.resolve(baseFrom, patterns[0]), path.resolve(baseTo, to), debug)
-  }
+  if (dirs.length === 0 && patterns.length === 1 && !isPattern(patterns[0]) && isFileDst(to))
+    return cp(
+      path.resolve(baseFrom, patterns[0]),
+      path.resolve(baseTo, to),
+      debug
+    )
 
-  await globby(patterns, { cwd: baseFrom, absolute: true, ignoreFiles }).then((files) =>
+  await globby(patterns, { dot: true, ...opts, cwd: baseFrom, absolute: true, ignoreFiles }).then((files) =>
     Promise.all([
       ...files.map((file) =>
         cp(
           file,
-          path.resolve(baseTo, to, file.startsWith(baseFrom) ? path.relative(baseFrom, file) : path.basename(file))
+          path.resolve(baseTo, to, file.startsWith(baseFrom) ? path.relative(baseFrom, file) : path.basename(file)),
+          debug
         ),
       ),
-      ...dirs.map((dir) => cp(dir, path.resolve(baseTo, to))),
+      ...dirs.map((dir) => cp(
+        dir,
+        path.resolve(baseTo, to),
+        debug
+      )),
     ]),
   )
 }
@@ -47,7 +57,7 @@ export const parseSources = async (src, base) => {
       const entryAbs = path.resolve(base, entry)
 
       try {
-        if ((await fs.lstat(entryAbs))?.isDirectory()) {
+        if ((await fsStat(entryAbs))?.isDirectory()) {
           dirs.push(entryAbs)
 
           return
