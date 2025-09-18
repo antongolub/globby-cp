@@ -36,6 +36,7 @@ await copy({
   baseTo,     // process.cwd(),
   debug,      // () => {}
   ignoreFiles // undefined
+  // ...rest Partial<import('globby').Options>
 })
 ```
 
