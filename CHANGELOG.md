@@ -1,3 +1,8 @@
+## [1.4.4](https://github.com/antongolub/globby-cp/compare/v1.4.3...v1.4.4) (2025-09-18)
+
+### Fixes & improvements
+* fix: fix `isDir` precheck ([a1336cc](https://github.com/antongolub/globby-cp/commit/a1336cca2f46169a8be4756a487f547955c53ead))
+
 ## [1.4.3](https://github.com/antongolub/globby-cp/compare/v1.4.2...v1.4.3) (2025-09-18)
 
 ### Fixes & improvements

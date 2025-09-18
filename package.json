@@ -1,6 +1,6 @@
 {
   "name": "globby-cp",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "globby-boosted file copying util",
   "type": "module",
   "exports": {
