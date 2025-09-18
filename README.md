@@ -30,13 +30,13 @@ npx globby-cp ./* ./foo/bar --ignore-files .gitignore
 import {copy} from 'globby-cp'
 
 await copy({
-  from:       'src/**/*.js',
-  to:         'dist/',
-  baseFrom,   // process.cwd()
-  baseTo,     // process.cwd(),
-  debug,      // () => {}
-  ignoreFiles // undefined
-  // ...rest Partial<import('globby').Options>
+  from:         'src/**/*.js',
+  to:           'dist/',
+  baseFrom,     // process.cwd()
+  baseTo,       // process.cwd(),
+  debug,        // (...string[]): void => {}
+  ignoreFiles   // string[]
+  // ...rest    Partial<import('globby').Options>
 })
 ```
 
