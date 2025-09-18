@@ -1,3 +1,8 @@
+## [1.4.1](https://github.com/antongolub/globby-cp/compare/v1.4.0...v1.4.1) (2025-09-18)
+
+### Fixes & improvements
+* fix: apply npm pkg fix ([28d073b](https://github.com/antongolub/globby-cp/commit/28d073b7bb8efb5668c3797483c82672f8ea6f09))
+
 ## [1.4.0](https://github.com/antongolub/globby-cp/compare/v1.3.0...v1.4.0) (2025-09-18)
 
 ### Fixes & improvements

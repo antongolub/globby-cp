@@ -1,6 +1,6 @@
 {
   "name": "globby-cp",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "globby-boosted file copying util",
   "type": "module",
   "exports": {
@@ -8,8 +8,8 @@
   },
   "types": "./src/main/js/index.d.ts",
   "bin": {
-    "globby-cp": "./src/main/js/cli.js",
-    "gcp": "./src/main/js/cli.js"
+    "globby-cp": "src/main/js/cli.js",
+    "gcp": "src/main/js/cli.js"
   },
   "scripts": {
     "test": "c8 node ./src/test/js/index.test.js && c8 report -r lcov",
