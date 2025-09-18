@@ -69,6 +69,12 @@ jobs:
             package.json
           retention-days: 1
 
+      - uses: qltysh/qlty-action/coverage@v2
+        if: github.ref == 'refs/heads/master'
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/lcov.info
+
   test_pr:
     needs: build
     if: ${{ github.event_name == 'pull_request' }}
@@ -138,7 +144,7 @@ jobs:
           GIT_COMMITTER_NAME: 'Anton Golub'
         run: npx zx-semrel
 
-      - name: Push coverage
+      - name: Push coverage (local)
         env:
           npm_config_yes: true
         run: |
