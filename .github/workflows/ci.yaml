@@ -2,18 +2,57 @@
 # If the tests pass and this is a push to the master branch it also runs Semantic Release.
 name: CI
 on: [push, pull_request]
+
+permissions:
+  contents: read
+
+env:
+  npm_config_audit: false
+  npm_config_fund: false
+  npm_config_save: false
+  npm_config_package_lock: false
+
 jobs:
-  test_push:
-    name: Test on push
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn run docs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: |
+            docs
+            package.json
+          retention-days: 1
+
+  test:
+    needs: build
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          cache: 'yarn'
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: build
 
       - name: Install deps
         run: yarn install
@@ -21,80 +60,86 @@ jobs:
       - name: Run tests
         run: yarn test
 
+      - uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          name: coverage
+          path: |
+            coverage
+            package.json
+          retention-days: 1
+
   test_pr:
+    needs: build
+    if: ${{ github.event_name == 'pull_request' }}
     name: Test PR (Node v${{ matrix.node-version }}, OS ${{ matrix.os }})
     strategy:
       matrix:
         os: [ ubuntu-22.04 ]
-        node-version: [ 16, 20 ]
+        node-version: [ 18, 24 ]
 
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
+          cache: 'yarn'
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: build
 
       - name: Install deps
         run: yarn install
 
       - name: Run tests
-        timeout-minutes: 1
         run: yarn test
+        timeout-minutes: 1
 
   release:
-    name: Release
-    # https://github.com/orgs/community/discussions/25692
+    needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: test_push
-    runs-on: ubuntu-22.04
     permissions:
+      checks: read
+      statuses: write
       contents: write
+      packages: write
+      id-token: write
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: master
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          cache: 'yarn'
 
-      - name: Install deps
-        run: yarn install
+      - uses: actions/download-artifact@v5 # with empty should download all
 
-      - name: Run tests
-        run: yarn test
-
-      - name: Docs
-        run: yarn docs
-
-      - name: Codeclimate
-        uses: paambaati/codeclimate-action@v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: |
-            ${{github.workspace}}/coverage/lcov.info:lcov
-
-#      - name: Debug
-#        run: |
-#          npx credebug --test=${{ secrets.TEST }} --ghtoken=${{ secrets.GH_TOKEN }} --repo=${{ github.repository }} --a --b=b --c c --d
-
-      - name: Store coverage
-        run: |
-          npm_config_yes=true npx ggcp lcov.info https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage'
-
-      - name: Release
+      - name: Semrel
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_PROVENANCE: true
+          GH_USER: 'antongolub'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_COMMITTER_EMAIL: 'antongolub@antongolub.com'
           GIT_COMMITTER_NAME: 'Anton Golub'
-        run: npm_config_yes=true npx zx-semrel
+        run: npx zx-semrel
+
+      - name: Push coverage
+        env:
+          npm_config_yes: true
+        run: |
+          npx lcov.info https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage for ${{ github.sha }}'
