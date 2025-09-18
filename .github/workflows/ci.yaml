@@ -139,7 +139,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_PROVENANCE: true
           GH_USER: 'antongolub'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: x-access-token:${{ secrets.GITHUB_TOKEN }}
           GIT_COMMITTER_EMAIL: 'antongolub@antongolub.com'
           GIT_COMMITTER_NAME: 'Anton Golub'
         run: npx zx-semrel
@@ -148,4 +148,4 @@ jobs:
         env:
           npm_config_yes: true
         run: |
-          npx lcov.info https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage for ${{ github.sha }}'
+          npx lcov.info https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage for ${{ github.sha }}'
