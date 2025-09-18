@@ -16,7 +16,7 @@ export const copy = async ({
   to,
   baseFrom = process.cwd(),
   baseTo = process.cwd(),
-  debug = process.env.DEBUG ? console.debug : () => {},
+  debug = process.env.DEBUG ? console.log : () => {},
   ignoreFiles,
   ...opts
 }) => {

@@ -50,10 +50,6 @@ jobs:
           node-version: 24
           cache: 'yarn'
 
-      - uses: actions/download-artifact@v5
-        with:
-          name: build
-
       - name: Install deps
         run: yarn install
 
@@ -96,10 +92,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-
-      - uses: actions/download-artifact@v5
-        with:
-          name: build
 
       - name: Install deps
         run: yarn install
