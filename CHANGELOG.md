@@ -1,3 +1,8 @@
+## [1.4.2](https://github.com/antongolub/globby-cp/compare/v1.4.1...v1.4.2) (2025-09-18)
+
+### Fixes & improvements
+* fix: handle dir2dir and file2file flows ([ae75e77](https://github.com/antongolub/globby-cp/commit/ae75e77668c083958551c0fdfb63e7f73d45f349))
+
 ## [1.4.1](https://github.com/antongolub/globby-cp/compare/v1.4.0...v1.4.1) (2025-09-18)
 
 ### Fixes & improvements
