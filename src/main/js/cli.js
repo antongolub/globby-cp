@@ -38,4 +38,10 @@ await copy({
   baseFrom:     argv.baseFrom,
   baseTo:       argv.baseTo,
   ignoreFiles:  argv.i || argv.ignoreFiles
-})
+}).then(
+  () => process.exit(0),
+  err => {
+    console.error(err)
+    process.exit(1)
+  }
+)
