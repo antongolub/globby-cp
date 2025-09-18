@@ -1,3 +1,8 @@
+## [1.4.3](https://github.com/antongolub/globby-cp/compare/v1.4.2...v1.4.3) (2025-09-18)
+
+### Fixes & improvements
+* fix: handle file to dir case explicitly ([2f88355](https://github.com/antongolub/globby-cp/commit/2f88355b915d42d0cb00a85341190a24519b346c))
+
 ## [1.4.2](https://github.com/antongolub/globby-cp/compare/v1.4.1...v1.4.2) (2025-09-18)
 
 ### Fixes & improvements
