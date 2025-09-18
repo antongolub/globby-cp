@@ -33,7 +33,7 @@ export const copy = async ({
   if (isPattern(to)) throw new Error('`to` must not be a glob pattern')
 
   const _to = path.resolve(baseTo, to)
-  if (_to.endsWith('/')) await fsMkdir(_to, { recursive: true })
+  if (to.endsWith('/')) await fsMkdir(_to, { recursive: true })
 
   const { patterns, dirs } = await parseSources(from, baseFrom)
 
