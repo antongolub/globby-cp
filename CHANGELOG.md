@@ -1,3 +1,11 @@
+## [1.4.0](https://github.com/antongolub/globby-cp/compare/v1.3.0...v1.4.0) (2025-09-18)
+
+### Fixes & improvements
+* docs: tweak up usage example ([5b9fe01](https://github.com/antongolub/globby-cp/commit/5b9fe01cb81ea1f8025875ba4ac78443f3123b23))
+
+### Features
+* feat: accept `globby` extra opts, enable `dot` by default ([f194e74](https://github.com/antongolub/globby-cp/commit/f194e74c0286b85c77e6ae615ad50becb74dc34e))
+
 ## [1.3.0](https://github.com/antongolub/globby-cp/compare/v1.2.0...v1.3.0) (2023-11-20)
 
 ### Features
