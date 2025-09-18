@@ -147,5 +147,6 @@ jobs:
       - name: Push coverage (local)
         env:
           npm_config_yes: true
+          DEBUG: true
         run: |
           npx ggcp lcov.info https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --cwd=${{ github.workspace }}/coverage --message='chore: push coverage for ${{ github.sha }}'
