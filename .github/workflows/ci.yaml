@@ -25,7 +25,7 @@ jobs:
           node-version: 24
           cache: 'yarn'
       - run: yarn
-      - run: yarn run docs
+      - run: yarn build
       - uses: actions/upload-artifact@v4
         with:
           name: build
@@ -125,6 +125,8 @@ jobs:
           cache: 'yarn'
 
       - uses: actions/download-artifact@v5 # with empty should download all
+        with:
+          merge-multiple: true
 
       - name: Semrel
         env:
@@ -141,4 +143,4 @@ jobs:
           npm_config_yes: true
           DEBUG: true
         run: |
-          npx ggcp --cwd=${{ github.workspace }}/coverage lcov.info https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --message='chore: push coverage for ${{ github.sha }}'
+          npx ggcp {{ github.workspace }}/coverage/lcov.info https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --message='chore: push coverage for ${{ github.sha }}'

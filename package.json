@@ -12,8 +12,9 @@
     "gcp": "src/main/js/cli.js"
   },
   "scripts": {
-    "test": "c8 node ./src/test/js/index.test.js && c8 report -r lcov",
-    "docs": "mkdir -p docs && cp ./README.md ./docs/README.md"
+    "build": "yarn run build:docs",
+    "build:docs": "mkdir -p docs && cp ./README.md ./docs/README.md",
+    "test": "c8 node ./src/test/js/index.test.js && c8 report -r lcov"
   },
   "repository": {
     "type": "git",
