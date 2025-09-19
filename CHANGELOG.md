@@ -1,3 +1,8 @@
+## [1.4.5](https://github.com/antongolub/globby-cp/compare/v1.4.4...v1.4.5) (2025-09-19)
+
+### Fixes & improvements
+* fix: handle trailing `/` in git refs ([787457c](https://github.com/antongolub/globby-cp/commit/787457c612041dc2f55766f222fe7572a7602f73))
+
 ## [1.4.4](https://github.com/antongolub/globby-cp/compare/v1.4.3...v1.4.4) (2025-09-18)
 
 ### Fixes & improvements
