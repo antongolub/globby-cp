@@ -11,6 +11,7 @@ env:
   npm_config_fund: false
   npm_config_save: false
   npm_config_package_lock: false
+  npm_config_yes: true
 
 jobs:
   build:
@@ -139,8 +140,5 @@ jobs:
         run: npx zx-semrel
 
       - name: Push coverage (local)
-        env:
-          npm_config_yes: true
-          DEBUG: true
         run: |
           npx ggcp {{ github.workspace }}/coverage/lcov.info https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git/coverage/${{ github.event.repository.updated_at }}-${{ github.sha }} --message='chore: push coverage for ${{ github.sha }}'
