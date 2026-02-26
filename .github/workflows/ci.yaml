@@ -27,7 +27,7 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: build
           path: |
@@ -57,7 +57,7 @@ jobs:
       - name: Run tests
         run: yarn test
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: github.ref == 'refs/heads/master'
         with:
           name: coverage
@@ -125,7 +125,7 @@ jobs:
           node-version: 24
           cache: 'yarn'
 
-      - uses: actions/download-artifact@v5 # with empty should download all
+      - uses: actions/download-artifact@v8 # with empty should download all
         with:
           merge-multiple: true
 
