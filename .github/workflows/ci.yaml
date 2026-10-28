@@ -23,7 +23,7 @@ jobs:
       - name: Use Node.js 24
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 26
           cache: 'yarn'
       - run: yarn
       - run: yarn build
@@ -48,7 +48,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 26
           cache: 'yarn'
 
       - name: Install deps
@@ -122,7 +122,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 26
           cache: 'yarn'
 
       - uses: actions/download-artifact@v5 # with empty should download all
